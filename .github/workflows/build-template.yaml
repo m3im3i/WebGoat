@@ -70,3 +70,16 @@ jobs:
               restore-keys: ubuntu-latest-m2-
         - name: Test with Maven
           run: mvn --no-transfer-progress verify
+        - name: Log in to the Container registry
+          uses: docker/login-action@v1
+          with:
+            registry: ghcr.io # Using Github container repository
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}  
+        - name: Build and push Docker image for server
+          uses: docker/build-push-action@v2
+          with:
+            context: './'
+            push: true
+            tags: ghcr.io/${{ github.repository }}/WebGoat:0.0.${{ github.run_number }}
+            #labels: ${{ steps.meta.outputs.labels }}
