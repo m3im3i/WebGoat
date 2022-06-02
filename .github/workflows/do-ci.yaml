@@ -29,6 +29,7 @@ jobs:
       image-name: 'webgoat'
     secrets: inherit
   call-build:
+    needs: call-codeql
     uses: m3im3i/actions-template/.github/workflows/build-template.yaml@main
     with:
       working-repo: ${{ github.repository }}
