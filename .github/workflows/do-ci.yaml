@@ -23,5 +23,8 @@ on:
       
 jobs:
   call-build:
-    uses: m3im3i/webgoat/.github/workflows/build-template.yaml@main
+    uses: m3im3i/actions-template/.github/workflows/build-template.yaml@main
+    with:
+      working-repo: ${{ github.repository }}
+      image-name: 'webgoat'
     secrets: inherit
