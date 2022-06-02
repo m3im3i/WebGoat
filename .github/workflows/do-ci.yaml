@@ -23,5 +23,5 @@ on:
       
 jobs:
   call-build-in-local-repo:
-    uses: ./.github/workflows/build-template.yml
+    uses: ${{ github.repository }}/.github/workflows/build-template.yml@main
     secrets: inherit
