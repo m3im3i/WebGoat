@@ -82,5 +82,5 @@ jobs:
           with:
             context: './'
             push: true
-            tags: ghcr.io/${{ github.repository }}/WebGoat:0.0.${{ github.run_number }}
+            tags: ghcr.io/${{ github.repository }}/webgoat:0.0.${{ github.run_number }}
             #labels: ${{ steps.meta.outputs.labels }}
