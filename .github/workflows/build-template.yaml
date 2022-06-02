@@ -1,4 +1,4 @@
-name: "Build"
+name: "Build For Template"
 on:
   pull_request:
     paths-ignore:
