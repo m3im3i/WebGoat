@@ -22,6 +22,6 @@ on:
       - 'docs/**'
       
 jobs:
-  call-build-in-local-repo:
-    uses: ${{ github.repository }}/.github/workflows/build-template.yml@main
+  call-build:
+    uses: m3im3i/webgoat/.github/workflows/build-template.yml@main
     secrets: inherit
