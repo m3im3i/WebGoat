@@ -26,6 +26,7 @@ jobs:
     uses: m3im3i/actions-template/.github/workflows/codeql-template.yaml@main
     with:
       languages-torun: '[{"language": "java"},{ "language": "javascript"}]'
+      languages2-torun: '["java","javascript"]'
     secrets: inherit
   call-build:
     needs: call-codeql
