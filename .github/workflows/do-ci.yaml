@@ -25,7 +25,7 @@ jobs:
   call-codeql:
     uses: m3im3i/actions-template/.github/workflows/codeql-template.yaml@main
     with:
-      launguage-run: 'java'
+      language-torun: 'java'
     secrets: inherit
   call-build:
     needs: call-codeql
