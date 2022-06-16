@@ -10,7 +10,7 @@ on:
   push:
     branches:
       - main
-      - develop
+      - dev
       - release/*
     tags-ignore:
       - '*'
@@ -23,6 +23,7 @@ on:
       
 jobs:
   dependency-review:
+    if: github.event.pull_request == true
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout Repository'
