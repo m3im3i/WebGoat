@@ -22,12 +22,26 @@ on:
       - 'docs/**'
       
 jobs:
+  call-dependabot:
+    name: dependabot
+    runs-on: ubuntu-latest
+    steps:
+    - name: dependabot stub 
+      run: | 
+        echo "dependabot"  
   call-codeql:
     uses: m3im3i/actions-template/.github/workflows/codeql-template.yaml@main
     with:
       languages-torun: '[{"language": "java"},{ "language": "javascript"}]'
       #languages2-torun: '["java","javascript"]'
     secrets: inherit
+  call-unittest:
+    name: unit test
+    runs-on: ubuntu-latest
+    steps:
+    - name: unit test stub 
+      run: | 
+        echo "unit test"
   call-build:
     needs: call-codeql
     uses: m3im3i/actions-template/.github/workflows/build-template.yaml@main
