@@ -23,7 +23,7 @@ on:
       
 jobs:
   dependency-review:
-    if: github.event.pull_request == true
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout Repository'
