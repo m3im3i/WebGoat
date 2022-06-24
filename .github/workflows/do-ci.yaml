@@ -27,6 +27,7 @@ jobs:
     uses: m3im3i/actions-template/.github/workflows/depend-review-template.yaml@main
     with:
       fail-severity: 'critical'
+      continue: true
   call-codeql:
     uses: m3im3i/actions-template/.github/workflows/codeql-template.yaml@main
     with:
@@ -45,5 +46,4 @@ jobs:
     with:
       working-repo: ${{ github.repository }}
       image-name: 'webgoat'
-      continue: true
     secrets: inherit
