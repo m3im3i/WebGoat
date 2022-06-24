@@ -25,6 +25,8 @@ jobs:
   call-dependency-review:
     if: github.event_name == 'pull_request'
     uses: m3im3i/actions-template/.github/workflows/depend-review-template.yaml@main
+    with:
+      fail-severity: 'critical'
   call-codeql:
     uses: m3im3i/actions-template/.github/workflows/codeql-template.yaml@main
     with:
@@ -38,7 +40,7 @@ jobs:
       run: | 
         echo "unit test"
   call-build:
-    needs: call-codeql
+    needs: [call-codeql, call-dependency-review]
     uses: m3im3i/actions-template/.github/workflows/build-template.yaml@main
     with:
       working-repo: ${{ github.repository }}
