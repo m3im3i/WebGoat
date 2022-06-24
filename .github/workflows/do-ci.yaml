@@ -42,6 +42,7 @@ jobs:
   call-build:
     needs: [call-codeql, call-dependency-review]
     uses: m3im3i/actions-template/.github/workflows/build-template.yaml@main
+    continue-on-error: true
     with:
       working-repo: ${{ github.repository }}
       image-name: 'webgoat'
