@@ -10,7 +10,7 @@ on:
   push:
     branches:
       - main
-      - develop
+      - dev
       - release/*
     tags-ignore:
       - '*'
@@ -22,36 +22,18 @@ on:
       - 'docs/**'
       
 jobs:
-  dependency-review:
-    runs-on: ubuntu-latest
-    steps:
-      - name: 'Checkout Repository'
-        uses: actions/checkout@v3
-      - name: Dependency Review
-        uses: actions/dependency-review-action@v2
-        with:
-          # Possible values: "critical", "high", "moderate", "low"
-          fail-on-severity: moderate
-          #
-          # You can only can only include one of these two options: `allow-licenses` and `deny-licences`
-          #
-          # Possible values: Any `spdx_id` value(s) from https://docs.github.com/en/rest/licenses
-          # allow-licenses: GPL-3.0, BSD-3-Clause, MIT
-          #
-          # Possible values: Any `spdx_id` value(s) from https://docs.github.com/en/rest/licenses
-          # deny-licenses: LGPL-2.0, BSD-2-Clause
-  call-dependabot:
-    name: dependabot
-    runs-on: ubuntu-latest
-    steps:
-    - name: dependabot stub 
-      run: | 
-        echo "dependabot"  
+  call-dependency-review:
+    if: github.event_name == 'pull_request'
+    uses: m3im3i/actions-template/.github/workflows/depend-review-template.yaml@main
+    with:
+      fail-severity: 'critical'
+      continue: true
+      label: 'ubuntu-latest'
   call-codeql:
     uses: m3im3i/actions-template/.github/workflows/codeql-template.yaml@main
     with:
       languages-torun: '[{"language": "java"},{ "language": "javascript"}]'
-      #languages2-torun: '["java","javascript"]'
+      label: 'ubuntu-latest'
     secrets: inherit
   call-unittest:
     name: unit test
@@ -61,9 +43,10 @@ jobs:
       run: | 
         echo "unit test"
   call-build:
-    needs: call-codeql
+    needs: [call-codeql, call-dependency-review]
     uses: m3im3i/actions-template/.github/workflows/build-template.yaml@main
     with:
       working-repo: ${{ github.repository }}
       image-name: 'webgoat'
+      label: 'ubuntu-latest'
     secrets: inherit
